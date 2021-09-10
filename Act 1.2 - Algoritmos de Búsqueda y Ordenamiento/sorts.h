@@ -9,13 +9,13 @@ using namespace std;
 template <class T>
 class Sorts {
     private:
-        void swap(vector<T> &, int, int);
+        void swap(vector<T> &vec, int i, int ref);
     public:
-        vector<T> ordenaSeleccion(const vector<T>&);
-        vector<T> ordenaBurbuja(const vector<T>&);
-        vector<T> ordenaMerge(const vector<T>&);
+        void ordenaSeleccion(vector<T>&);
+        void ordenaBurbuja(vector<T>&);
+        void ordenaMerge(vector<T>&);
         int busqSecuencial(const vector<T>&, int d);
-        int busqBinaria(const vector<T>&, int d);
+        int busqBinaria(vector<T>&, int d);
 };
 
 template <class T>
@@ -26,8 +26,7 @@ void Sorts<T>::swap(vector<T> &vec, int i, int ref){
 }
 
 template <class T>
-vector<T> Sorts<T>::ordenaSeleccion(const vector<T> &v){
-    vector<T> vec(v);
+void Sorts<T>::ordenaSeleccion(vector<T> &vec){
     int ref;
     for (int i = vec.size() - 1; i > 0; i --){
         ref = 0;
@@ -40,12 +39,10 @@ vector<T> Sorts<T>::ordenaSeleccion(const vector<T> &v){
             swap(vec, i, ref);
         }
     }
-    return vec;
 }
 
 template <class T>
-vector<T> Sorts<T>::ordenaBurbuja(const vector<T>&v){
-    vector<T> vec(v);
+void Sorts<T>::ordenaBurbuja(vector<T>&vec){
     for (int i = vec.size() - 1; i > 0; i --){
         for (int j = 0; j < i; j ++){
             if (vec[j] > vec[j + 1]){
@@ -53,13 +50,40 @@ vector<T> Sorts<T>::ordenaBurbuja(const vector<T>&v){
             }
         }
     }
-    return vec;
 }
 
 template <class T>
-vector<T> Sorts<T>::ordenaMerge(const vector<T>&v){
-    vector<T> vec(v);
+void Sorts<T>::ordenaMerge(vector<T>&v){
+}
 
+template <class T>
+int Sorts<T>::busqSecuencial(const vector<T>&vec, int d){
+    for(int i = 1; i < vec.size(); i ++){
+        if (d == vec[i]){
+            return i;
+        }
+    }
+    return -1;
+}
+
+template <class T>
+int Sorts<T>::busqBinaria(vector<T>&vec, int d){
+    ordenaBurbuja(vec);
+    int i = 0;
+    int j = vec.size();
+    while (i <= j){
+        int mid = (i + j) / 2;
+        if (d == vec[mid]){
+            return mid;
+        }
+        else if (d > vec[mid]){
+            i = mid + 1;
+        }
+        else if (d < vec[mid]){
+            j = mid - 1;
+        }
+    }
+    return -1;
 }
 
 #endif
