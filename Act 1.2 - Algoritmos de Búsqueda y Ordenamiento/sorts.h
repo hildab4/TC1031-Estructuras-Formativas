@@ -124,7 +124,7 @@ int Sorts<T>::busqSecuencial(const vector<T>&vec, int d){
 
 template <class T>
 int Sorts<T>::busqBinaria(vector<T>&vec, int d){
-    ordenaBurbuja(vec);
+    ordenaMerge(vec);
     int i = 0;
     int j = vec.size();
     while (i <= j){
