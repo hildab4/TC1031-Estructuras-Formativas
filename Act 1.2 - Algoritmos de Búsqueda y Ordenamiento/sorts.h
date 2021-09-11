@@ -10,12 +10,15 @@ template <class T>
 class Sorts {
     private:
         void swap(vector<T> &vec, int i, int ref);
+        void copyArray(vector<T>&, vector<T>&, int, int);
+        void mergeArray(vector<T>&vec, vector<T>&tmp, int low, int mid, int high);
+        void mergeSplit(vector<T>&vec, vector<T>&tmp, int low, int high);
     public:
-        void ordenaSeleccion(vector<T>&);
-        void ordenaBurbuja(vector<T>&);
-        void ordenaMerge(vector<T>&);
-        int busqSecuencial(const vector<T>&, int d);
-        int busqBinaria(vector<T>&, int d);
+        void ordenaSeleccion(vector<T>&vec);
+        void ordenaBurbuja(vector<T>&vec);
+        void ordenaMerge(vector<T>&vec);
+        int busqSecuencial(const vector<T>&vec, int d);
+        int busqBinaria(vector<T>&vec, int d);
 };
 
 template <class T>
@@ -53,7 +56,60 @@ void Sorts<T>::ordenaBurbuja(vector<T>&vec){
 }
 
 template <class T>
-void Sorts<T>::ordenaMerge(vector<T>&v){
+void Sorts<T>::copyArray(vector<T>&vec, vector<T>&tmp, int low, int high){
+    for (int i = low; i <= high; i++){
+        vec[i] = tmp[i];
+    }
+}
+
+template <class T>
+void Sorts<T>::mergeArray(vector<T>&vec, vector<T>&tmp, int low, int mid, int high){
+    int i, j, k;
+    i = low;
+    j = mid + 1;
+    k = low;
+
+    while(i <= mid && j <= high){
+        if (vec[i] < vec[j]){
+            tmp[k] = vec[i];
+            i ++;
+        }
+        else{
+            tmp[k] = vec[j];
+            j ++;
+        }
+        k ++;
+    }
+    if (i > mid){
+        for (; j <= high; j++){
+            tmp[k++] = vec[j];
+        }
+    }
+    else{
+        for (; i <= mid; i++){
+            tmp[k++] = vec[i];
+        }
+    }
+}
+
+template <class T>
+void Sorts<T>::mergeSplit(vector<T>&vec, vector<T>&tmp, int low, int high){
+    int mid;
+
+    if ((high - low) < 1){
+        return;
+    }
+    mid = (high + low) / 2;
+    mergeSplit(vec, tmp, low, mid);
+    mergeSplit(vec, tmp, mid + 1, high);
+    mergeArray(vec, tmp, low, mid, high);
+    copyArray(vec, tmp, low, high);
+}
+
+template <class T>
+void Sorts<T>::ordenaMerge(vector<T>&vec){
+    vector<T> tmp(vec.size());
+    mergeSplit(vec, tmp, 0, vec.size() - 1);
 }
 
 template <class T>
