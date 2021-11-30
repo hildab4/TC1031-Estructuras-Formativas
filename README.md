@@ -1,7 +1,5 @@
 # TC1031_Estructuras_Formativas
 
-Repositorio de ejemplo
-
 # Correcciones en actividades
  ### Act 1.2 - Algoritmos de Búsqueda y Ordenamiento
 * La función busqSecuencial regresa correctamente la posición de 81, la cual es 0, en el siguiente arreglo -> {8829, 1390, 4422, 2922, 81}
