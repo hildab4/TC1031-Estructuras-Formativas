@@ -1,4 +1,5 @@
-# TC1031_Estructuras_Formativas
+# TC1031 Estructura de Datos y Algoritmos Fundamentales
+Dentro del Repositorio se encuentran distintas prácticas relacionadas a Estructura de Datos y Algoritmos Fundamentales, estos mismos se ubican dentro de la carpeta correspondiente al ejercicio.
 
 # Correcciones en actividades
 ### Act 1.2 - Algoritmos de Búsqueda y Ordenamiento
